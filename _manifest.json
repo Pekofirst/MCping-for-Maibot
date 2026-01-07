@@ -5,5 +5,11 @@
   "description": "一个简单的我的世界服务器查询插件",
   "author": {
     "name": "Pekofirst"
-  }
+  },
+  "license": "MIT",
+      "host_application": {
+        "min_version": "0.10.3"
+      },
+  "repository_url": "https://github.com/Pekofirst/MCping-for-Maibot",
+
 }
