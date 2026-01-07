@@ -1,0 +1,9 @@
+{
+  "manifest_version": 1,
+  "name": "mcping 插件",
+  "version": "1.0.0",
+  "description": "一个简单的我的世界服务器查询插件",
+  "author": {
+    "name": "Pekofirst"
+  }
+}
