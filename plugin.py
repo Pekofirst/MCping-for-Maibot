@@ -6,7 +6,7 @@ from mcstatus import JavaServer
 class MCpingCommand(BaseCommand):
     command_name = "mcping"
     command_description = "这是一个查询我的世界服务器状态的命令"
-    command_pattern = r"/^信息$/"
+    command_pattern = r"^信息$"
     async def execute(self) -> Tuple[bool,  bool]:
             server = JavaServer.lookup("pekoserver.tech:18221")
             status = server.status()
@@ -29,5 +29,6 @@ class HelloWorldPlugin(BasePlugin):
     config_schema = {}  # 配置文件模式（目前为空）
 
     def get_plugin_components(self) -> List[Tuple[ComponentInfo, Type]]: # 获取插件组件
-        return [MCpingCommand.get_command_info,MCpingCommand]
+        return [MCpingCommand.get_command_info(),MCpingCommand]
     
+
