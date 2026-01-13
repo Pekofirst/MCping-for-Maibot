@@ -30,13 +30,13 @@ class RollCommand(BaseCommand):
     # 命令描述
     command_description = "随机数/随机选择工具：无参数时生成1-120的随机数；跟参数时随机选一个参数；跟数字时随机一个数字"
     # 正则匹配模式：匹配roll开头，可选跟随任意参数（支持空格分隔的多个参数）
-    command_pattern = r"^roll(?:\s+(.+))?$"
+    command_pattern = r"^roll(?:\s+(?P<params>.+))?$"
 
-    async def execute(self) -> Tuple[bool, bool]:
+    async def execute(self) -> Tuple[bool,Optional[str], bool]:
         try:
             # 获取命令匹配的参数（self.args 是正则匹配后的分组结果，不同框架可能略有差异，此处按原插件逻辑适配）
             # 正则分组1对应匹配到的参数部分，若无参数则为None
-            command_args = self.args[0] if len(self.args) > 0 else None
+            command_args = self.matched_groups.get("params")
 
             if command_args:
                 # 有参数：分割参数（按空格分割，支持多个参数）
@@ -65,11 +65,11 @@ class RollCommand(BaseCommand):
 
             # 发送结果文本
             await self.send_text(result)
-            return True, True
+            return True,"Success", True
         except Exception as e:
             # 异常处理：捕获所有可能的错误并提示
             await self.send_text(f"♥ 执行出错：{str(e)} ♥")
-            return False, True
+            return False,"error", True
 @register_plugin # 注册插件
 class MCpingPlugin(BasePlugin):
     # 以下是插件基本信息和方法（必须填写）
